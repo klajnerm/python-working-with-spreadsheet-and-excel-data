@@ -26,9 +26,26 @@ print(sheet["B1"].number_format)
 print(sheet["C1"].number_format)
 
 # Use some built-in styles
+# sheet["A1"].style = "Title"
+# sheet["B1"].style = "Calculation"
+# sheet["C1"].style = "Accent2"
+# sheet["B1"].number_format = opnumstyle.FORMAT_CURRENCY_USD_SIMPLE
+# sheet["C1"].number_format = opnumstyle.FORMAT_DATE_DDMMYY
 
+sheet.column_dimensions['A'].width = 30
+sheet.row_dimensions[1].height = 50
 
 # Create styles using Fonts and Colors
+italic_font = Font(italic=True, size=16)
+colored_text = Font(name="Courier New", size=20, color="000000FF")
+centered_text = Alignment(horizontal="center", vertical="top")
+border_side = Side(border_style="mediumDashed")
+cell_border = Border(top=border_side, right=border_side, left=border_side, bottom=border_side)
+
+sheet["A1"].font = italic_font
+sheet["B1"].font = colored_text
+sheet["B1"].alignment = centered_text
+sheet["C1"].border = cell_border
 
 
 # Save the workbook
