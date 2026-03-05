@@ -15,13 +15,18 @@ workbook = openpyxl.load_workbook(filename)
 sheet = workbook["SalesData"]
 
 # define the style to represent the formatting
+red_color = "ffd2d2"
+bold_text = Font(bold=True, color="00ff0000")
+red_fill = PatternFill(bgColor=red_color, fill_type="solid")
 
+diff_style = DifferentialStyle(font=bold_text, fill=red_fill)
 
 # create a rule for the condition
-
+rule = Rule(type="expression", dxf=diff_style, formula=["$L1<10000"])
 
 # add the rule to the entire sheet
-
+dimensions = "L1:L701"
+sheet.conditional_formatting.add(dimensions, rule)
 
 workbook.save("CondFormat.xlsx")
 print("Workbook created successfully!")
