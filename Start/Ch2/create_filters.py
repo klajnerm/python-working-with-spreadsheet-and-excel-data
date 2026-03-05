@@ -30,6 +30,7 @@ for row in inventory_data:
     sheet.append(row)
 
 # Add the filters to the columns
-
+filters = sheet.auto_filter
+filters.ref = sheet.dimensions
 
 wb.save("Inventory.xlsx")
