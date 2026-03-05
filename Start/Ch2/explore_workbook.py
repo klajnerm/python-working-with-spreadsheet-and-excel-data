@@ -3,18 +3,36 @@
 # Open, load, and explore workbook content 
 
 import openpyxl
+from openpyxl import worksheet
 
 filename = "FinancialSample.xlsx"
 
 # Load the workbook
-
+workbook = openpyxl.load_workbook(filename)
 
 # Print basic information
-
-
+print(f"Number of worksheets: {len(workbook.sheetnames)}")
+for worksheet_name in workbook.sheetnames:
+    worksheet = workbook[worksheet_name]
+    print(f"\nWorksheet: {worksheet_name}")
+    
 # Explore each worksheet
 
-    
     # Get dimensions
-
+    dimensions = worksheet.dimensions
+    print(f"    - Dimensions: {dimensions}")
+    
+    print(f"Min row: {worksheet.min_row}")
+    print(f"Max row: {worksheet.max_row}")
+    print(f"Min columnn: {worksheet.min_column}")
+    print(f"Max columnn: {worksheet.max_column}")
+    
     # Check if the worksheet is empty
+    if worksheet.max_row == 1 and worksheet.max_column == 1:
+        print("    - Worksheet is empty")
+    else:
+        cell = worksheet["A1"]
+        print(f"    -Top-left cell value: {cell.value}")
+        cell = worksheet.cell(row=worksheet.max_row, column=worksheet.max_column)
+        print(f"    -Bottom-right cell value: {cell.value}")
+        
